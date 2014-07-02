@@ -1,0 +1,13 @@
+﻿body {
+    margin: 0 auto;
+    width: 800px;
+}
+h1 {
+    color: #663399;
+}
+td {
+    background-color: #FFFF66;
+}
+p {
+    width: 500px;
+}
