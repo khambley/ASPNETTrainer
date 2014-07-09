@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Models" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="RecipeDBEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Models.Category" />
+    <EntitySet Name="Ingredients" EntityType="Models.Ingredient" />
+    <EntitySet Name="Recipes" EntityType="Models.Recipe" />
+    <EntitySet Name="Tools" EntityType="Models.Tool" />
+    <AssociationSet Name="FK_Recipe_Category" Association="Models.FK_Recipe_Category">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Recipes" EntitySet="Recipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ingredients_Recipe" Association="Models.FK_Ingredients_Recipe">
+      <End Role="Recipes" EntitySet="Recipes" />
+      <End Role="Ingredients" EntitySet="Ingredients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tools_Recipe" Association="Models.FK_Tools_Recipe">
+      <End Role="Recipes" EntitySet="Recipes" />
+      <End Role="Tools" EntitySet="Tools" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Recipes" Relationship="Models.FK_Recipe_Category" FromRole="Categories" ToRole="Recipes" />
+  </EntityType>
+  <EntityType Name="Ingredient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RecipeId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Recipe" Relationship="Models.FK_Ingredients_Recipe" FromRole="Ingredients" ToRole="Recipes" />
+  </EntityType>
+  <EntityType Name="Recipe">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="PrepTime" Type="Int32" Nullable="false" />
+    <Property Name="CookTime" Type="Int32" Nullable="false" />
+    <Property Name="Directions" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Category" Relationship="Models.FK_Recipe_Category" FromRole="Recipes" ToRole="Categories" />
+    <NavigationProperty Name="Ingredients" Relationship="Models.FK_Ingredients_Recipe" FromRole="Recipes" ToRole="Ingredients" />
+    <NavigationProperty Name="Tools" Relationship="Models.FK_Tools_Recipe" FromRole="Recipes" ToRole="Tools" />
+  </EntityType>
+  <EntityType Name="Tool">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RecipeId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Recipe" Relationship="Models.FK_Tools_Recipe" FromRole="Tools" ToRole="Recipes" />
+  </EntityType>
+  <Association Name="FK_Recipe_Category">
+    <End Role="Categories" Type="Models.Category" Multiplicity="1" />
+    <End Role="Recipes" Type="Models.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recipes">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ingredients_Recipe">
+    <End Role="Recipes" Type="Models.Recipe" Multiplicity="1" />
+    <End Role="Ingredients" Type="Models.Ingredient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ingredients">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tools_Recipe">
+    <End Role="Recipes" Type="Models.Recipe" Multiplicity="1" />
+    <End Role="Tools" Type="Models.Tool" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tools">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

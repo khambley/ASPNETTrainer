@@ -1,0 +1,8 @@
+C:\Users\hambleyka\OneDrive\ASPNETTrainer\DataLayer1\bin\Debug\DataLayer1.dll.config
+C:\Users\hambleyka\OneDrive\ASPNETTrainer\DataLayer1\bin\Debug\DataLayer1.dll
+C:\Users\hambleyka\OneDrive\ASPNETTrainer\DataLayer1\bin\Debug\DataLayer1.pdb
+C:\Users\hambleyka\OneDrive\ASPNETTrainer\DataLayer1\bin\Debug\EntityFramework.dll
+C:\Users\hambleyka\OneDrive\ASPNETTrainer\DataLayer1\bin\Debug\EntityFramework.xml
+C:\Users\hambleyka\OneDrive\ASPNETTrainer\DataLayer1\obj\Debug\DataLayer1.csprojResolveAssemblyReference.cache
+C:\Users\hambleyka\OneDrive\ASPNETTrainer\DataLayer1\obj\Debug\DataLayer1.dll
+C:\Users\hambleyka\OneDrive\ASPNETTrainer\DataLayer1\obj\Debug\DataLayer1.pdb

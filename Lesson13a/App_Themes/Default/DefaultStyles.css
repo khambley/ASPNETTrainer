@@ -1,0 +1,19 @@
+﻿body
+{
+    background: #FFFFF4;
+}
+h1
+{
+    color: Blue;
+    margin: 0px;
+}
+h2
+{
+    margin-bottom: 0px;
+}
+label
+{
+    padding: 5px 0px 0px 0px;
+    font-size: .7em;
+    display: block;
+}

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelsStoreContainer">
+    <EntitySet Name="Categories" EntityType="Models.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ingredients" EntityType="Models.Store.Ingredients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Recipes" EntityType="Models.Store.Recipes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tools" EntityType="Models.Store.Tools" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Ingredients_Recipe" Association="Models.Store.FK_Ingredients_Recipe">
+      <End Role="Recipes" EntitySet="Recipes" />
+      <End Role="Ingredients" EntitySet="Ingredients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Category" Association="Models.Store.FK_Recipe_Category">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Recipes" EntitySet="Recipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tools_Recipe" Association="Models.Store.FK_Tools_Recipe">
+      <End Role="Recipes" EntitySet="Recipes" />
+      <End Role="Tools" EntitySet="Tools" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Ingredients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RecipeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Recipes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="PrepTime" Type="int" Nullable="false" />
+    <Property Name="CookTime" Type="int" Nullable="false" />
+    <Property Name="Directions" Type="text" Nullable="false" />
+    <Property Name="DateAdded" Type="smalldatetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tools">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RecipeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Ingredients_Recipe">
+    <End Role="Recipes" Type="Models.Store.Recipes" Multiplicity="1" />
+    <End Role="Ingredients" Type="Models.Store.Ingredients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ingredients">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Category">
+    <End Role="Categories" Type="Models.Store.Categories" Multiplicity="1" />
+    <End Role="Recipes" Type="Models.Store.Recipes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recipes">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tools_Recipe">
+    <End Role="Recipes" Type="Models.Store.Recipes" Multiplicity="1" />
+    <End Role="Tools" Type="Models.Store.Tools" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tools">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
